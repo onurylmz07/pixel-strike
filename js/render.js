@@ -1,12 +1,10 @@
 import { W, H } from "./constants.js";
 import {
-  buildPlayerFrames,
   buildGunSprite,
   buildMuzzleFlash,
   buildEnemyFrames,
 } from "./sprites.js";
 
-const playerFrames = buildPlayerFrames();
 const gunSprite = buildGunSprite();
 const muzzleFlash = buildMuzzleFlash();
 const enemyFrames = buildEnemyFrames();
@@ -49,10 +47,6 @@ export function drawArena(ctx) {
 }
 
 export function drawPlayer(ctx, player) {
-  const frame = player.moving
-    ? playerFrames[Math.floor(player.anim) % playerFrames.length]
-    : playerFrames[0];
-
   ctx.save();
   ctx.translate(player.x, player.y);
 
@@ -60,15 +54,25 @@ export function drawPlayer(ctx, player) {
     ctx.globalAlpha = 0.45;
   }
 
-  // body rotates toward aim for top-down readability
   ctx.rotate(player.angle);
-  ctx.drawImage(frame, -16, -16, 32, 32);
 
-  // gun
-  ctx.drawImage(gunSprite, 6, -6, 28, 12);
+  // Engine exhaust pulse behind the craft
+  const pulse = Math.floor(player.anim * (player.moving ? 1 : 0.4)) % 4;
+  const exhaustColors = ["#ff6b4a", "#ff9f1c", "#ffe066", "#fff8c0"];
+  ctx.fillStyle = exhaustColors[pulse];
+  ctx.fillRect(-26, -4, 6 + (pulse % 2), 3);
+  ctx.fillRect(-26, 2, 6 + ((pulse + 1) % 2), 3);
+  if (player.moving) {
+    ctx.fillStyle = "#fff8c0";
+    ctx.fillRect(-30, -2, 4, 2);
+    ctx.fillRect(-30, 1, 4, 2);
+  }
+
+  // Fancy fighter aircraft (replaces the old gun)
+  ctx.drawImage(gunSprite, -16, -18, 56, 36);
 
   if (player.muzzle > 0) {
-    ctx.drawImage(muzzleFlash, 30, -10, 20, 20);
+    ctx.drawImage(muzzleFlash, 32, -12, 24, 24);
   }
 
   ctx.restore();

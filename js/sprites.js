@@ -67,41 +67,98 @@ export function buildPlayerFrames() {
   return frames;
 }
 
+/** Fancy top-down fighter aircraft (replaces the old gun) */
 export function buildGunSprite() {
-  return createPixelCanvas(14, 6, (ctx) => {
-    // grip
-    for (let y = 2; y < 6; y++) {
-      px(ctx, 0, y, "#5c4030");
-      px(ctx, 1, y, "#5c4030");
+  return createPixelCanvas(32, 18, (ctx) => {
+    for (let x = 2; x < 24; x++) {
+      px(ctx, x, 8, "#0d1f1a");
+      px(ctx, x, 9, "#0d1f1a");
     }
-    // barrel
-    for (let x = 2; x < 13; x++) {
-      px(ctx, x, 1, "#c9c9c9");
-      px(ctx, x, 2, "#9a9a9a");
-      px(ctx, x, 3, "#c9c9c9");
+    for (let x = 2; x < 26; x++) {
+      px(ctx, x, 7, "#245a50");
+      px(ctx, x, 8, "#4ecdc4");
+      px(ctx, x, 9, "#3d8b7a");
+      px(ctx, x, 10, "#245a50");
     }
-    px(ctx, 12, 0, "#888");
-    px(ctx, 12, 4, "#888");
-    // muzzle
-    px(ctx, 13, 1, "#666");
-    px(ctx, 13, 2, "#666");
-    px(ctx, 13, 3, "#666");
+    for (let x = 6; x < 22; x++) px(ctx, x, 8, "#7af0dc");
+
+    px(ctx, 26, 7, "#f0c75e");
+    px(ctx, 26, 8, "#ffe9a0");
+    px(ctx, 26, 9, "#f0c75e");
+    px(ctx, 26, 10, "#d4a84b");
+    px(ctx, 27, 8, "#fff8c0");
+    px(ctx, 27, 9, "#ffe9a0");
+    px(ctx, 28, 8, "#fff");
+    px(ctx, 28, 9, "#c9c9c9");
+    px(ctx, 29, 8, "#9a9a9a");
+    px(ctx, 30, 8, "#666");
+
+    for (let i = 0; i < 10; i++) {
+      const lift = Math.floor(i / 2);
+      px(ctx, 5 + i, 6 - lift, "#3d8b7a");
+      px(ctx, 5 + i, 5 - lift, "#1d5248");
+      px(ctx, 5 + i, 4 - Math.floor(i / 3), "#2a6b5e");
+      px(ctx, 5 + i, 11 + lift, "#3d8b7a");
+      px(ctx, 5 + i, 12 + lift, "#1d5248");
+      px(ctx, 5 + i, 13 + Math.floor(i / 3), "#2a6b5e");
+    }
+
+    px(ctx, 7, 3, "#f0c75e");
+    px(ctx, 8, 2, "#f0c75e");
+    px(ctx, 9, 1, "#ffe9a0");
+    px(ctx, 7, 14, "#f0c75e");
+    px(ctx, 8, 15, "#f0c75e");
+    px(ctx, 9, 16, "#ffe9a0");
+
+    px(ctx, 10, 0, "#ddd");
+    px(ctx, 11, 0, "#f0c75e");
+    px(ctx, 12, 0, "#fff");
+    px(ctx, 10, 17, "#ddd");
+    px(ctx, 11, 17, "#f0c75e");
+    px(ctx, 12, 17, "#fff");
+
+    px(ctx, 16, 7, "#7ad9ff");
+    px(ctx, 17, 7, "#e8fffa");
+    px(ctx, 18, 7, "#a8ecff");
+    px(ctx, 19, 7, "#7ad9ff");
+    px(ctx, 16, 8, "#4ecdc4");
+    px(ctx, 17, 8, "#b8fff3");
+    px(ctx, 18, 8, "#5ee0c8");
+
+    px(ctx, 2, 5, "#1d5248");
+    px(ctx, 3, 6, "#2a6b5e");
+    px(ctx, 1, 6, "#0d1f1a");
+    px(ctx, 2, 12, "#1d5248");
+    px(ctx, 3, 11, "#2a6b5e");
+    px(ctx, 1, 11, "#0d1f1a");
+
+    px(ctx, 0, 7, "#111");
+    px(ctx, 1, 7, "#333");
+    px(ctx, 0, 10, "#111");
+    px(ctx, 1, 10, "#333");
+
+    px(ctx, 12, 8, "#f0c75e");
+    px(ctx, 13, 8, "#fff");
+    px(ctx, 20, 9, "#f0c75e");
   });
 }
 
 export function buildMuzzleFlash() {
-  return createPixelCanvas(10, 10, (ctx) => {
-    const mid = 5;
-    px(ctx, mid, mid, "#fff8c0");
-    px(ctx, mid - 1, mid, "#ffe066");
-    px(ctx, mid + 1, mid, "#ffe066");
+  return createPixelCanvas(12, 12, (ctx) => {
+    const mid = 6;
+    px(ctx, mid, mid, "#fff");
+    px(ctx, mid - 1, mid, "#fff8c0");
+    px(ctx, mid + 1, mid, "#fff8c0");
     px(ctx, mid, mid - 1, "#ffe066");
     px(ctx, mid, mid + 1, "#ffe066");
     px(ctx, mid - 2, mid, "#ff9f1c");
     px(ctx, mid + 2, mid, "#ff9f1c");
-    px(ctx, mid, mid - 2, "#ff9f1c");
-    px(ctx, mid, mid + 2, "#ff9f1c");
-    px(ctx, mid - 1, mid - 1, "#fff");
+    px(ctx, mid, mid - 2, "#ff6b4a");
+    px(ctx, mid, mid + 2, "#ff6b4a");
+    px(ctx, mid - 3, mid, "#ff6b4a");
+    px(ctx, mid + 3, mid, "#ffe066");
+    px(ctx, mid - 1, mid - 1, "#fff8c0");
+    px(ctx, mid + 1, mid + 1, "#fff8c0");
   });
 }
 

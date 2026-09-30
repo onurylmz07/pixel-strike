@@ -44,11 +44,13 @@ export function updatePlayer(player, dt, bullets, particles) {
   const move = getMoveVector();
   player.moving = move.x !== 0 || move.y !== 0;
 
+  // Always tick anim so exhaust pulses even when idle
+  player.anim += dt * (player.moving ? 12 : 5);
+
   if (player.moving) {
     player.x += move.x * PLAYER_SPEED * dt;
     player.y += move.y * PLAYER_SPEED * dt;
-    player.anim += dt * 10;
-    if (Math.random() < dt * 8) particles.dust(player.x, player.y);
+    if (Math.random() < dt * 10) particles.dust(player.x, player.y);
   }
 
   player.x = clamp(player.x, player.radius, W - player.radius);
@@ -62,7 +64,7 @@ export function updatePlayer(player, dt, bullets, particles) {
   if (player.invuln > 0) player.invuln -= dt;
 
   if (consumeShoot() && player.cooldown <= 0) {
-    const muzzleDist = 22;
+    const muzzleDist = 30;
     const bx = player.x + Math.cos(player.angle) * muzzleDist;
     const by = player.y + Math.sin(player.angle) * muzzleDist;
     bullets.push(
@@ -70,7 +72,7 @@ export function updatePlayer(player, dt, bullets, particles) {
     );
     player.cooldown = SHOOT_COOLDOWN;
     player.muzzle = 0.08;
-    particles.burst(bx, by, "#ffe066", 4, 60);
+    particles.burst(bx, by, "#ffe066", 5, 70);
   }
 }
 
