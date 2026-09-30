@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixel Strike — Top-Down Shooter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="game-wrap">
+    <canvas id="game" width="800" height="600" aria-label="Pixel Strike game"></canvas>
+
+    <div id="hud" class="hidden" aria-live="polite">
+      <div class="hud-row">
+        <span id="hud-level">LVL 1/5</span>
+        <span id="hud-wave">WAVE 1/2</span>
+        <span id="hud-enemies">ENEMIES 0</span>
+      </div>
+      <div class="hud-row">
+        <div id="hud-hp" class="hp-bar" title="Health">
+          <div id="hud-hp-fill"></div>
+        </div>
+        <span id="hud-score">SCORE 0</span>
+      </div>
+    </div>
+
+    <div id="overlay" class="overlay">
+      <div class="panel" id="panel-menu">
+        <h1>PIXEL STRIKE</h1>
+        <p class="blurb">Survive the waves. Clear 5 levels.</p>
+        <ul class="controls">
+          <li><kbd>←↑↓→</kbd> or <kbd>WASD</kbd> move</li>
+          <li><kbd>Mouse</kbd> aim · <kbd>Click</kbd> shoot</li>
+          <li><kbd>Esc</kbd> pause / quit</li>
+        </ul>
+        <p class="hi-score" id="menu-hi">HI-SCORE 0</p>
+        <button type="button" class="btn" id="btn-start">START</button>
+      </div>
+
+      <div class="panel hidden" id="panel-pause">
+        <h2>PAUSED</h2>
+        <button type="button" class="btn" id="btn-resume">RESUME</button>
+        <button type="button" class="btn btn-ghost" id="btn-quit">QUIT TO MENU</button>
+      </div>
+
+      <div class="panel hidden" id="panel-levelclear">
+        <h2>LEVEL CLEAR!</h2>
+        <p id="levelclear-msg">Get ready…</p>
+        <button type="button" class="btn" id="btn-next">NEXT LEVEL</button>
+      </div>
+
+      <div class="panel hidden" id="panel-gameover">
+        <h2>GAME OVER</h2>
+        <p id="gameover-msg">Score 0</p>
+        <button type="button" class="btn" id="btn-retry">RETRY</button>
+        <button type="button" class="btn btn-ghost" id="btn-menu-go">MENU</button>
+      </div>
+
+      <div class="panel hidden" id="panel-victory">
+        <h2>VICTORY!</h2>
+        <p id="victory-msg">You cleared all 5 levels.</p>
+        <p class="hi-score" id="victory-hi">HI-SCORE 0</p>
+        <button type="button" class="btn" id="btn-menu-win">MENU</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
